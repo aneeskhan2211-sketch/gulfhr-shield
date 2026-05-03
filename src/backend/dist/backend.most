@@ -1,0 +1,405 @@
+// Version: 1.0.0
+type AlertId__758494499 = Nat;
+type AlertSeverity__620858409 = {#High; #Low; #Medium};
+type AlertType__89193554 =
+  {#ComplianceRisk; #DocumentExpiring; #PayrollPending; #VisaExpiring};
+type Alert__83147453 =
+  {
+    alertType : AlertType__89193554;
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    employeeId : ?EmployeeId__291433800;
+    id : AlertId__758494499;
+    isRead : Bool;
+    message : Text;
+    readAt : ?Timestamp__301639476;
+    readBy : ?UserId__158757552;
+    resourceId : ?Text;
+    severity : AlertSeverity__620858409
+  };
+type AttendanceLogId__397950022 = Nat;
+type AttendanceLog__652128570 =
+  {
+    checkInLocation : ?GeoLocation__542526844;
+    checkInTime : Timestamp__301639476;
+    checkOutLocation : ?GeoLocation__542526844;
+    checkOutTime : ?Timestamp__301639476;
+    companyId : CompanyId__78853864;
+    consentGiven : Bool;
+    createdAt : Timestamp__301639476;
+    employeeId : EmployeeId__291433800;
+    id : AttendanceLogId__397950022;
+    selfieBlob : ?ExternalBlob__671167343;
+    workHours : ?Float
+  };
+type AuditActionType__707369934 =
+  {
+    #AlertThresholdChanged;
+    #CompanyProfileUpdated;
+    #DocumentDeleted;
+    #DocumentDownloaded;
+    #DocumentUploaded;
+    #EmployeeAdded;
+    #EmployeeDeleted;
+    #PayrollApproved;
+    #RoleChanged;
+    #SalaryChanged;
+    #UserLogin;
+    #WPSExported
+  };
+type AuditLogId__176736089 = Nat;
+type AuditLog__476823628 =
+  {
+    actionType : AuditActionType__707369934;
+    affectedResourceId : Text;
+    affectedResourceName : Text;
+    affectedResourceType : Text;
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    id : AuditLogId__176736089;
+    newValue : ?Text;
+    oldValue : ?Text;
+    status : AuditStatus__197554449;
+    userId : UserId__158757552
+  };
+type AuditStatus__197554449 = {#Failure; #Success};
+type CompanyId__78853864 = Nat;
+type Company__1022829239 =
+  {
+    address : Text;
+    alertThresholdDays : [Nat];
+    billingEmail : Text;
+    country : Text;
+    createdAt : Timestamp__301639476;
+    id : CompanyId__78853864;
+    name : Text;
+    phone : Text;
+    registrationNumber : Text;
+    subscriptionTier : SubscriptionTier__67843932;
+    trialEndDate : ?Timestamp__301639476;
+    vatNumber : Text
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type DocumentId__446996092 = Nat;
+type DocumentType__1018277930 =
+  {
+    #BankDocuments;
+    #Contract;
+    #ID;
+    #Insurance;
+    #Medical;
+    #PassportCopy;
+    #Visa
+  };
+type EmployeeDocument__104659737 =
+  {
+    blob : ExternalBlob__671167343;
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    documentType : DocumentType__1018277930;
+    employeeId : EmployeeId__291433800;
+    expiryDate : ?Timestamp__301639476;
+    fileName : Text;
+    fileSize : Nat;
+    id : DocumentId__446996092;
+    mimeType : Text;
+    uploadedBy : UserId__158757552
+  };
+type EmployeeId__291433800 = Nat;
+type EmployeeStatus__727395819 = {#Active; #OnLeave; #Separated};
+type Employee__808965025 =
+  {
+    bankName : Text;
+    basicSalary : Nat;
+    companyId : CompanyId__78853864;
+    contractEndDate : ?Timestamp__301639476;
+    contractStartDate : Timestamp__301639476;
+    createdAt : Timestamp__301639476;
+    department : Text;
+    emiratesId : Text;
+    employeeCode : Text;
+    fullName : Text;
+    iban : Text;
+    id : EmployeeId__291433800;
+    jobTitle : Text;
+    joiningDate : Timestamp__301639476;
+    nationality : Text;
+    passportNumber : Text;
+    status : EmployeeStatus__727395819;
+    updatedAt : Timestamp__301639476;
+    visaNumber : Text;
+    workLocation : WorkLocation__747105409
+  };
+type ExternalBlob__671167343 = Blob;
+type GeoLocation__542526844 = {latitude : Float; longitude : Float};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NotificationLog__126487437 =
+  {
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    employeeId : ?EmployeeId__291433800;
+    id : Nat;
+    message : Text;
+    notificationType : {#PayrollApproval; #Salary; #VisaAlert};
+    status : {#Failed; #Pending; #Sent}
+  };
+type OnboardingProgress__1000801547 =
+  {
+    companyId : CompanyId__78853864;
+    completedAt : ?Timestamp__301639476;
+    currentStep : Nat;
+    stepsCompleted : [Bool]
+  };
+type PayrollItemId__403318244 = Nat;
+type PayrollItem__1056246873 =
+  {
+    advanceSalary : Nat;
+    basicSalary : Nat;
+    createdAt : Timestamp__301639476;
+    deductions : Nat;
+    employeeId : EmployeeId__291433800;
+    housingAllowance : Nat;
+    id : PayrollItemId__403318244;
+    leaveDeduction : Nat;
+    netSalary : Nat;
+    overtime : Nat;
+    payrollRunId : PayrollRunId__777130376;
+    transportAllowance : Nat;
+    updatedAt : Timestamp__301639476
+  };
+type PayrollRunId__777130376 = Nat;
+type PayrollRun__859926118 =
+  {
+    accountantReviewedAt : ?Timestamp__301639476;
+    accountantReviewedBy : ?UserId__158757552;
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    createdBy : UserId__158757552;
+    employeeIds : [EmployeeId__291433800];
+    exportedAt : ?Timestamp__301639476;
+    hrApprovedAt : ?Timestamp__301639476;
+    hrApprovedBy : ?UserId__158757552;
+    id : PayrollRunId__777130376;
+    notes : Text;
+    ownerApprovedAt : ?Timestamp__301639476;
+    ownerApprovedBy : ?UserId__158757552;
+    payPeriodMonth : Nat;
+    payPeriodYear : Nat;
+    status : PayrollStatus__483582428;
+    totalNetSalary : Nat
+  };
+type PayrollStatus__483582428 =
+  {
+    #AccountantReviewed;
+    #Draft;
+    #Exported;
+    #HRApproved;
+    #OwnerApproved;
+    #Paid
+  };
+type SubscriptionId__300481435 = Nat;
+type SubscriptionStatus__712529666 = {#Active; #Cancelled; #Expired};
+type SubscriptionTier__67843932 = {#Business; #Enterprise; #Growth; #Starter};
+type Subscription__388769915 =
+  {
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    employeeLimit : Nat;
+    id : SubscriptionId__300481435;
+    isTrialActive : Bool;
+    paidStartDate : ?Timestamp__301639476;
+    renewalDate : ?Timestamp__301639476;
+    status : SubscriptionStatus__712529666;
+    tier : SubscriptionTier__67843932;
+    trialEndDate : ?Timestamp__301639476;
+    trialStartDate : ?Timestamp__301639476
+  };
+type Timestamp__301639476 = Int;
+type UserId__158757552 = Nat;
+type UserRole__1073662873 = {#admin; #guest; #user};
+type UserRole__887406725 =
+  {
+    #Accountant;
+    #BranchManager;
+    #CompanyOwner;
+    #Employee;
+    #HRManager;
+    #SuperAdmin
+  };
+type UserStatus__645844234 = {#Active; #Inactive; #Suspended};
+type User__933515552 =
+  {
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    email : Text;
+    fullName : Text;
+    id : UserId__158757552;
+    lastLogin : ?Timestamp__301639476;
+    principal : Principal;
+    role : UserRole__887406725;
+    status : UserStatus__645844234
+  };
+type VisaRecordId__775021086 = Nat;
+type VisaRecordType__608190862 =
+  {#Contract; #Insurance; #LabourCard; #MedicalCard; #Passport; #Visa};
+type VisaRecord__848010618 =
+  {
+    companyId : CompanyId__78853864;
+    createdAt : Timestamp__301639476;
+    employeeId : EmployeeId__291433800;
+    expiryDate : Timestamp__301639476;
+    id : VisaRecordId__775021086;
+    notes : Text;
+    recordType : VisaRecordType__608190862;
+    updatedAt : Timestamp__301639476
+  };
+type WhatsAppSettings__669005341 =
+  {
+    employeeId : EmployeeId__291433800;
+    payrollApprovalEnabled : Bool;
+    phoneNumber : Text;
+    salaryEnabled : Bool;
+    visaAlertEnabled : Bool
+  };
+type WorkLocation__747105409 =
+  {#Bahrain; #Kuwait; #Oman; #Qatar; #Saudi; #UAE};
+type WpsCountryFormat__401698386 =
+  {#OmanMOL; #QatarTemplate; #SaudiTemplate; #UAESIF};
+type WpsExportId__734151333 = Nat;
+type WpsExportStatus__140749386 = {#Failed; #Generated; #Submitted};
+type WpsExport__40171769 =
+  {
+    companyId : CompanyId__78853864;
+    countryFormat : WpsCountryFormat__401698386;
+    createdAt : Timestamp__301639476;
+    employeeCount : Nat;
+    exportedBy : UserId__158757552;
+    fileName : Text;
+    id : WpsExportId__734151333;
+    payrollRunId : PayrollRunId__777130376;
+    status : WpsExportStatus__140749386
+  };
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1073662873>
+    };
+  stable alerts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Alert__83147453]];
+      var elementIndex : Nat__490723111
+    };
+  stable attendanceLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AttendanceLog__652128570]];
+      var elementIndex : Nat__490723111
+    };
+  stable auditLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AuditLog__476823628]];
+      var elementIndex : Nat__490723111
+    };
+  stable companies :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Company__1022829239]];
+      var elementIndex : Nat__490723111
+    };
+  stable counters :
+    {
+      var alert : Nat;
+      var attendanceLog : Nat;
+      var auditLog : Nat;
+      var company : Nat;
+      var document : Nat;
+      var employee : Nat;
+      var payrollItem : Nat;
+      var payrollRun : Nat;
+      var subscription : Nat;
+      var user : Nat;
+      var visaRecord : Nat;
+      var wpsExport : Nat
+    };
+  stable documents :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?EmployeeDocument__104659737]];
+      var elementIndex : Nat__490723111
+    };
+  stable employees :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Employee__808965025]];
+      var elementIndex : Nat__490723111
+    };
+  stable notificationCounters : {var notification : Nat};
+  stable notificationLogs :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?NotificationLog__126487437]];
+      var elementIndex : Nat__490723111
+    };
+  stable onboardingProgressList :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?OnboardingProgress__1000801547]];
+      var elementIndex : Nat__490723111
+    };
+  stable payrollItems :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?PayrollItem__1056246873]];
+      var elementIndex : Nat__490723111
+    };
+  stable payrollRuns :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?PayrollRun__859926118]];
+      var elementIndex : Nat__490723111
+    };
+  stable subscriptions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Subscription__388769915]];
+      var elementIndex : Nat__490723111
+    };
+  stable users :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?User__933515552]];
+      var elementIndex : Nat__490723111
+    };
+  stable visaRecords :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?VisaRecord__848010618]];
+      var elementIndex : Nat__490723111
+    };
+  stable whatsAppSettingsList :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?WhatsAppSettings__669005341]];
+      var elementIndex : Nat__490723111
+    };
+  stable wpsExports :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?WpsExport__40171769]];
+      var elementIndex : Nat__490723111
+    }
+};

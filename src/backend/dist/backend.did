@@ -1,0 +1,813 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type WpsExportStatus = 
+ variant {
+   Failed;
+   Generated;
+   Submitted;
+ };
+type WpsExportInput = 
+ record {
+   countryFormat: WpsCountryFormat;
+   payrollRunId: PayrollRunId;
+ };
+type WpsExportId = nat;
+type WpsExport = 
+ record {
+   companyId: CompanyId;
+   countryFormat: WpsCountryFormat;
+   createdAt: Timestamp;
+   employeeCount: nat;
+   exportedBy: UserId;
+   fileName: text;
+   id: WpsExportId;
+   payrollRunId: PayrollRunId;
+   status: WpsExportStatus;
+ };
+type WpsCountryFormat = 
+ variant {
+   OmanMOL;
+   QatarTemplate;
+   SaudiTemplate;
+   UAESIF;
+ };
+type WorkLocation = 
+ variant {
+   Bahrain;
+   Kuwait;
+   Oman;
+   Qatar;
+   Saudi;
+   UAE;
+ };
+type WhatsAppSettings = 
+ record {
+   employeeId: EmployeeId;
+   payrollApprovalEnabled: bool;
+   phoneNumber: text;
+   salaryEnabled: bool;
+   visaAlertEnabled: bool;
+ };
+type VisaRecordType = 
+ variant {
+   Contract;
+   Insurance;
+   LabourCard;
+   MedicalCard;
+   Passport;
+   Visa;
+ };
+type VisaRecordInput = 
+ record {
+   employeeId: EmployeeId;
+   expiryDate: Timestamp;
+   notes: text;
+   recordType: VisaRecordType;
+ };
+type VisaRecordId = nat;
+type VisaRecord = 
+ record {
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   employeeId: EmployeeId;
+   expiryDate: Timestamp;
+   id: VisaRecordId;
+   notes: text;
+   recordType: VisaRecordType;
+   updatedAt: Timestamp;
+ };
+type UserStatus = 
+ variant {
+   Active;
+   Inactive;
+   Suspended;
+ };
+type UserRole__1 = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserRole = 
+ variant {
+   Accountant;
+   BranchManager;
+   CompanyOwner;
+   Employee;
+   HRManager;
+   SuperAdmin;
+ };
+type UserInput = 
+ record {
+   email: text;
+   fullName: text;
+   role: UserRole;
+ };
+type UserId = nat;
+type User = 
+ record {
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   email: text;
+   fullName: text;
+   id: UserId;
+   lastLogin: opt Timestamp;
+   "principal": principal;
+   role: UserRole;
+   status: UserStatus;
+ };
+type Timestamp = int;
+type SubscriptionTier = 
+ variant {
+   Business;
+   Enterprise;
+   Growth;
+   Starter;
+ };
+type SubscriptionStatus = 
+ variant {
+   Active;
+   Cancelled;
+   Expired;
+ };
+type SubscriptionId = nat;
+type Subscription = 
+ record {
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   employeeLimit: nat;
+   id: SubscriptionId;
+   isTrialActive: bool;
+   paidStartDate: opt Timestamp;
+   renewalDate: opt Timestamp;
+   status: SubscriptionStatus;
+   tier: SubscriptionTier;
+   trialEndDate: opt Timestamp;
+   trialStartDate: opt Timestamp;
+ };
+type RiskFactor = 
+ record {
+   description: text;
+   employeeCount: nat;
+   estimatedFine: nat;
+   factorType: variant {
+                 MissingDocument;
+                 PayrollDelay;
+                 VisaExpiry;
+                 WpsError;
+               };
+   severity: text;
+ };
+type Result_9 = 
+ variant {
+   err: ApiError;
+   ok: Company;
+ };
+type Result_8 = 
+ variant {
+   err: ApiError;
+   ok: Employee;
+ };
+type Result_7 = 
+ variant {
+   err: ApiError;
+   ok: OnboardingProgress;
+ };
+type Result_6 = 
+ variant {
+   err: ApiError;
+   ok: User;
+ };
+type Result_5 = 
+ variant {
+   err: ApiError;
+   ok: VisaRecord;
+ };
+type Result_4 = 
+ variant {
+   err: ApiError;
+   ok;
+ };
+type Result_33 = 
+ variant {
+   err: ApiError;
+   ok: ImportResult;
+ };
+type Result_32 = 
+ variant {
+   err: ApiError;
+   ok: AttendanceLog;
+ };
+type Result_31 = 
+ variant {
+   err: ApiError;
+   ok: NotificationLog;
+ };
+type Result_30 = 
+ variant {
+   err: ApiError;
+   ok: record {
+         export: WpsExport;
+         fileContent: text;
+       };
+ };
+type Result_3 = 
+ variant {
+   err: ApiError;
+   ok: Subscription;
+ };
+type Result_29 = 
+ variant {
+   err: ApiError;
+   ok: opt AttendanceLog;
+ };
+type Result_28 = 
+ variant {
+   err: ApiError;
+   ok:
+    record {
+      complianceScore: nat;
+      expiredVisaCount: nat;
+      expiringDocumentCount: nat;
+      pendingPayrollCount: nat;
+      totalEmployees: nat;
+      unreadAlertCount: nat;
+    };
+ };
+type Result_27 = 
+ variant {
+   err: ApiError;
+   ok: ComplianceRiskScore;
+ };
+type Result_26 = 
+ variant {
+   err: ApiError;
+   ok: PayrollRun;
+ };
+type Result_25 = 
+ variant {
+   err: ApiError;
+   ok: PenaltyExposure;
+ };
+type Result_24 = 
+ variant {
+   err: ApiError;
+   ok: ROIMetrics;
+ };
+type Result_23 = 
+ variant {
+   err: ApiError;
+   ok: WhatsAppSettings;
+ };
+type Result_22 = 
+ variant {
+   err: ApiError;
+   ok: vec AttendanceLog;
+ };
+type Result_21 = 
+ variant {
+   err: ApiError;
+   ok: vec AuditLog;
+ };
+type Result_20 = 
+ variant {
+   err: ApiError;
+   ok: vec EmployeeDocument;
+ };
+type Result_2 = 
+ variant {
+   err: ApiError;
+   ok: EmployeeDocument;
+ };
+type Result_19 = 
+ variant {
+   err: ApiError;
+   ok: vec Employee;
+ };
+type Result_18 = 
+ variant {
+   err: ApiError;
+   ok: vec NotificationLog;
+ };
+type Result_17 = 
+ variant {
+   err: ApiError;
+   ok: vec PayrollItem;
+ };
+type Result_16 = 
+ variant {
+   err: ApiError;
+   ok: vec PayrollRun;
+ };
+type Result_15 = 
+ variant {
+   err: ApiError;
+   ok: vec Alert;
+ };
+type Result_14 = 
+ variant {
+   err: ApiError;
+   ok: vec User;
+ };
+type Result_13 = 
+ variant {
+   err: ApiError;
+   ok: vec VisaRecord;
+ };
+type Result_12 = 
+ variant {
+   err: ApiError;
+   ok: vec record {
+             "record": VisaRecord;
+             status: ExpiryStatus;
+           };
+ };
+type Result_11 = 
+ variant {
+   err: ApiError;
+   ok: vec WpsExport;
+ };
+type Result_10 = 
+ variant {
+   err: ApiError;
+   ok: bool;
+ };
+type Result_1 = 
+ variant {
+   err: ApiError;
+   ok: PayrollItem;
+ };
+type Result = 
+ variant {
+   err: ApiError;
+   ok: vec text;
+ };
+type ROIMetrics = 
+ record {
+   complianceScoreImprovement: float64;
+   currency: text;
+   estimatedPenaltiesAvoided: nat;
+   payrollProcessedCount: nat;
+   payrollTotalAmount: nat;
+   timeSavedHours: float64;
+ };
+type PenaltyExposure = 
+ record {
+   breakdown: vec PenaltyBreakdown;
+   currency: text;
+   total: nat;
+ };
+type PenaltyBreakdown = 
+ record {
+   amount: nat;
+   category: text;
+   count: nat;
+ };
+type PayrollStatus = 
+ variant {
+   AccountantReviewed;
+   Draft;
+   Exported;
+   HRApproved;
+   OwnerApproved;
+   Paid;
+ };
+type PayrollRunInput = 
+ record {
+   employeeIds: vec EmployeeId;
+   notes: text;
+   payPeriodMonth: nat;
+   payPeriodYear: nat;
+ };
+type PayrollRunId = nat;
+type PayrollRun = 
+ record {
+   accountantReviewedAt: opt Timestamp;
+   accountantReviewedBy: opt UserId;
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   createdBy: UserId;
+   employeeIds: vec EmployeeId;
+   exportedAt: opt Timestamp;
+   hrApprovedAt: opt Timestamp;
+   hrApprovedBy: opt UserId;
+   id: PayrollRunId;
+   notes: text;
+   ownerApprovedAt: opt Timestamp;
+   ownerApprovedBy: opt UserId;
+   payPeriodMonth: nat;
+   payPeriodYear: nat;
+   status: PayrollStatus;
+   totalNetSalary: nat;
+ };
+type PayrollItemInput = 
+ record {
+   advanceSalary: nat;
+   basicSalary: nat;
+   deductions: nat;
+   employeeId: EmployeeId;
+   housingAllowance: nat;
+   leaveDeduction: nat;
+   overtime: nat;
+   transportAllowance: nat;
+ };
+type PayrollItemId = nat;
+type PayrollItem = 
+ record {
+   advanceSalary: nat;
+   basicSalary: nat;
+   createdAt: Timestamp;
+   deductions: nat;
+   employeeId: EmployeeId;
+   housingAllowance: nat;
+   id: PayrollItemId;
+   leaveDeduction: nat;
+   netSalary: nat;
+   overtime: nat;
+   payrollRunId: PayrollRunId;
+   transportAllowance: nat;
+   updatedAt: Timestamp;
+ };
+type OnboardingProgress = 
+ record {
+   companyId: CompanyId;
+   completedAt: opt Timestamp;
+   currentStep: nat;
+   stepsCompleted: vec bool;
+ };
+type NotificationLog = 
+ record {
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   employeeId: opt EmployeeId;
+   id: nat;
+   message: text;
+   notificationType: variant {
+                       PayrollApproval;
+                       Salary;
+                       VisaAlert;
+                     };
+   status: variant {
+             Failed;
+             Pending;
+             Sent;
+           };
+ };
+type ImportResult = 
+ record {
+   errors: vec ImportError;
+   imported: nat;
+ };
+type ImportError = 
+ record {
+   reason: text;
+   row: nat;
+ };
+type GeoLocation = 
+ record {
+   latitude: float64;
+   longitude: float64;
+ };
+type ExternalBlob = blob;
+type ExpiryStatus = 
+ variant {
+   Expired;
+   ExpiringSoon: nat;
+   Valid;
+ };
+type EmployeeStatus = 
+ variant {
+   Active;
+   OnLeave;
+   Separated;
+ };
+type EmployeeInput = 
+ record {
+   bankName: text;
+   basicSalary: nat;
+   contractEndDate: opt Timestamp;
+   contractStartDate: Timestamp;
+   department: text;
+   emiratesId: text;
+   employeeCode: text;
+   fullName: text;
+   iban: text;
+   jobTitle: text;
+   joiningDate: Timestamp;
+   nationality: text;
+   passportNumber: text;
+   visaNumber: text;
+   workLocation: WorkLocation;
+ };
+type EmployeeImportRow = 
+ record {
+   basicSalary: nat;
+   department: text;
+   employeeCode: text;
+   fullName: text;
+   jobTitle: text;
+   nationality: text;
+   workLocation: text;
+ };
+type EmployeeId = nat;
+type EmployeeDocument = 
+ record {
+   "blob": ExternalBlob;
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   documentType: DocumentType;
+   employeeId: EmployeeId;
+   expiryDate: opt Timestamp;
+   fileName: text;
+   fileSize: nat;
+   id: DocumentId;
+   mimeType: text;
+   uploadedBy: UserId;
+ };
+type Employee = 
+ record {
+   bankName: text;
+   basicSalary: nat;
+   companyId: CompanyId;
+   contractEndDate: opt Timestamp;
+   contractStartDate: Timestamp;
+   createdAt: Timestamp;
+   department: text;
+   emiratesId: text;
+   employeeCode: text;
+   fullName: text;
+   iban: text;
+   id: EmployeeId;
+   jobTitle: text;
+   joiningDate: Timestamp;
+   nationality: text;
+   passportNumber: text;
+   status: EmployeeStatus;
+   updatedAt: Timestamp;
+   visaNumber: text;
+   workLocation: WorkLocation;
+ };
+type DocumentType = 
+ variant {
+   BankDocuments;
+   Contract;
+   ID;
+   Insurance;
+   Medical;
+   PassportCopy;
+   Visa;
+ };
+type DocumentInput = 
+ record {
+   "blob": ExternalBlob;
+   documentType: DocumentType;
+   employeeId: EmployeeId;
+   expiryDate: opt Timestamp;
+   fileName: text;
+   fileSize: nat;
+   mimeType: text;
+ };
+type DocumentId = nat;
+type CreateNotificationEntry = 
+ record {
+   employeeId: opt EmployeeId;
+   message: text;
+   notificationType: variant {
+                       PayrollApproval;
+                       Salary;
+                       VisaAlert;
+                     };
+ };
+type ComplianceRiskScore = 
+ record {
+   currency: text;
+   penaltyExposure: nat;
+   riskFactors: vec RiskFactor;
+   riskLevel: variant {
+                Critical;
+                High;
+                Low;
+                Medium;
+              };
+   score: nat;
+ };
+type CompanyInput = 
+ record {
+   address: text;
+   billingEmail: text;
+   country: text;
+   name: text;
+   phone: text;
+   registrationNumber: text;
+   vatNumber: text;
+ };
+type CompanyId = nat;
+type Company = 
+ record {
+   address: text;
+   alertThresholdDays: vec nat;
+   billingEmail: text;
+   country: text;
+   createdAt: Timestamp;
+   id: CompanyId;
+   name: text;
+   phone: text;
+   registrationNumber: text;
+   subscriptionTier: SubscriptionTier;
+   trialEndDate: opt Timestamp;
+   vatNumber: text;
+ };
+type CheckOutInput = 
+ record {
+   checkOutLocation: opt GeoLocation;
+   logId: AttendanceLogId;
+ };
+type CheckInInput = 
+ record {
+   checkInLocation: opt GeoLocation;
+   consentGiven: bool;
+   employeeId: EmployeeId;
+   selfieBlob: opt ExternalBlob;
+ };
+type AuditStatus = 
+ variant {
+   Failure;
+   Success;
+ };
+type AuditLogId = nat;
+type AuditLog = 
+ record {
+   actionType: AuditActionType;
+   affectedResourceId: text;
+   affectedResourceName: text;
+   affectedResourceType: text;
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   id: AuditLogId;
+   newValue: opt text;
+   oldValue: opt text;
+   status: AuditStatus;
+   userId: UserId;
+ };
+type AuditActionType = 
+ variant {
+   AlertThresholdChanged;
+   CompanyProfileUpdated;
+   DocumentDeleted;
+   DocumentDownloaded;
+   DocumentUploaded;
+   EmployeeAdded;
+   EmployeeDeleted;
+   PayrollApproved;
+   RoleChanged;
+   SalaryChanged;
+   UserLogin;
+   WPSExported;
+ };
+type AttendanceLogId = nat;
+type AttendanceLog = 
+ record {
+   checkInLocation: opt GeoLocation;
+   checkInTime: Timestamp;
+   checkOutLocation: opt GeoLocation;
+   checkOutTime: opt Timestamp;
+   companyId: CompanyId;
+   consentGiven: bool;
+   createdAt: Timestamp;
+   employeeId: EmployeeId;
+   id: AttendanceLogId;
+   selfieBlob: opt ExternalBlob;
+   workHours: opt float64;
+ };
+type ApiError = 
+ variant {
+   forbidden: text;
+   invalidInput: text;
+   limitExceeded: text;
+   notFound: text;
+   unauthorized: text;
+ };
+type AlertType = 
+ variant {
+   ComplianceRisk;
+   DocumentExpiring;
+   PayrollPending;
+   VisaExpiring;
+ };
+type AlertSeverity = 
+ variant {
+   High;
+   Low;
+   Medium;
+ };
+type AlertId = nat;
+type Alert = 
+ record {
+   alertType: AlertType;
+   companyId: CompanyId;
+   createdAt: Timestamp;
+   employeeId: opt EmployeeId;
+   id: AlertId;
+   isRead: bool;
+   message: text;
+   readAt: opt Timestamp;
+   readBy: opt UserId;
+   resourceId: opt text;
+   severity: AlertSeverity;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  _initializeAccessControl: () -> ();
+  addEmployee: (input: EmployeeInput) -> (Result_8);
+  addVisaRecord: (input: VisaRecordInput) -> (Result_5);
+  approvePayrollRun: (id: PayrollRunId, newStatus: PayrollStatus) ->
+   (Result_26);
+  assignCallerUserRole: (user: principal, role: UserRole__1) -> ();
+  bulkImportEmployees: (rows: vec EmployeeImportRow) -> (Result_33);
+  checkIn: (input: CheckInInput) -> (Result_32);
+  checkOut: (input: CheckOutInput) -> (Result_32);
+  createNotificationLog: (entry: CreateNotificationEntry) -> (Result_31);
+  createPayrollRun: (input: PayrollRunInput) -> (Result_26);
+  deactivateUser: (userId: UserId) -> (Result_6);
+  deleteDocument: (id: DocumentId) -> (Result_10);
+  generateWpsExport: (input: WpsExportInput) -> (Result_30);
+  getActiveCheckIn: (employeeId: EmployeeId) -> (Result_29) query;
+  getCallerUserRole: () -> (UserRole__1) query;
+  getCompanyStats: () -> (Result_28) query;
+  getComplianceRiskScore: () -> (Result_27) query;
+  getDocument: (id: DocumentId) -> (Result_2) query;
+  getEmployee: (id: EmployeeId) -> (Result_8) query;
+  getExpiringRecords: (thresholdDays: nat) -> (Result_13) query;
+  getMyCompany: () -> (Result_9) query;
+  getMyProfile: () -> (Result_6) query;
+  getOnboardingProgress: () -> (Result_7);
+  getPayrollRun: (id: PayrollRunId) -> (Result_26) query;
+  getPenaltyExposure: () -> (Result_25) query;
+  getROIMetrics: () -> (Result_24);
+  getSubscription: () -> (Result_3) query;
+  getWhatsAppSettings: (employeeId: EmployeeId) -> (Result_23);
+  initSeedData: () -> (bool);
+  inviteUser: (input: UserInput) -> (Result_6);
+  isCallerAdmin: () -> (bool) query;
+  isSeedDataLoaded: () -> (bool) query;
+  listAlerts: () -> (Result_15) query;
+  listAllAttendanceLogs: () -> (Result_22) query;
+  listAllDocuments: () -> (Result_20) query;
+  listAllVisaRecords: () -> (Result_13) query;
+  listAttendanceByMonth: (month: nat, year: nat) -> (Result_22) query;
+  listAttendanceLogs: (employeeId: EmployeeId) -> (Result_22) query;
+  listAuditLogs: () -> (Result_21) query;
+  listAuditLogsByAction: (actionType: AuditActionType) -> (Result_21) query;
+  listAuditLogsByDateRange: (fromNanos: Timestamp, toNanos: Timestamp) ->
+   (Result_21) query;
+  listAuditLogsByUser: (userId: UserId) -> (Result_21) query;
+  listDocuments: (employeeId: EmployeeId) -> (Result_20) query;
+  listEmployees: () -> (Result_19) query;
+  listNotificationLogs: (limit: nat) -> (Result_18);
+  listPayrollItems: (runId: PayrollRunId) -> (Result_17) query;
+  listPayrollRuns: () -> (Result_16) query;
+  listUnreadAlerts: () -> (Result_15) query;
+  listUsers: () -> (Result_14) query;
+  listVisaRecords: (employeeId: EmployeeId) -> (Result_13) query;
+  listVisaRecordsWithStatus: () -> (Result_12) query;
+  listWpsExports: () -> (Result_11) query;
+  logDocumentDownload: (id: DocumentId) -> (Result_10);
+  markAlertRead: (id: AlertId) -> (Result_10);
+  markAllAlertsRead: () -> (Result_10);
+  recordMyLogin: () -> (Result_6);
+  registerCompany: (input: CompanyInput) -> (Result_9);
+  registerUser: (companyId: CompanyId, input: UserInput) -> (Result_6);
+  removeEmployee: (id: EmployeeId) -> (Result_10);
+  removeVisaRecord: (id: VisaRecordId) -> (Result_10);
+  updateAlertThresholds: (thresholds: vec nat) -> (Result_9);
+  updateCompanyProfile: (input: CompanyInput) -> (Result_9);
+  updateEmployee: (id: EmployeeId, input: EmployeeInput) -> (Result_8);
+  updateOnboardingProgress: (step: nat) -> (Result_7);
+  updateUserRole: (userId: UserId, role: UserRole) -> (Result_6);
+  updateVisaRecord: (id: VisaRecordId, input: VisaRecordInput) -> (Result_5);
+  updateWhatsAppSettings: (settings: WhatsAppSettings) -> (Result_4);
+  upgradeSubscription: (tier: SubscriptionTier) -> (Result_3);
+  uploadDocument: (input: DocumentInput) -> (Result_2);
+  upsertPayrollItem: (runId: PayrollRunId, input: PayrollItemInput) ->
+   (Result_1);
+  validateWpsData: (payrollRunId: PayrollRunId) -> (Result) query;
+}

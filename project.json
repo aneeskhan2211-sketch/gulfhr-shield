@@ -1,0 +1,32 @@
+{
+  "overview": "GulfHR Shield is a high-conversion, premium HR compliance platform for Gulf SMEs. It functions as a Compliance Safety System — tracking visa expiry, payroll status, document gaps, and compliance risk with urgency-first UI, penalty exposure estimates, and ROI metrics to help businesses avoid fines and stay compliant in UAE, Saudi Arabia, Oman, Qatar, Bahrain, and Kuwait.",
+  "features": [
+    "Dynamic compliance risk engine with 0–100 score and Low/Medium/High/Critical levels",
+    "Penalty exposure calculator in AED, SAR, OMR, QAR with monthly potential loss",
+    "Instant Demo Mode — Try Demo without signup, 20 preloaded employees, guided walkthrough",
+    "1-Click CSV/Excel employee import with auto-column detection and bulk preview",
+    "Auto HR Assistant with rule-based suggestions and action buttons",
+    "WhatsApp notification UI with per-employee toggles and notification logs",
+    "ROI Dashboard showing time saved, payroll processed, penalties avoided",
+    "Trust Layer with security badges, encryption notices, and activity history",
+    "Smart Upsell System triggered by usage limits with inline plan comparison",
+    "Conversion-focused UI with urgency colors, business language, and prominent CTAs",
+    "Step-by-step onboarding wizard with progress tracking",
+    "Optimized pricing page with FAQ, testimonials, and benefit-driven copy",
+    "Skeleton loaders and premium mobile-responsive SaaS design"
+  ],
+  "category": "productivity",
+  "tags": [
+    "hr",
+    "compliance",
+    "gulf",
+    "saas",
+    "payroll",
+    "wps",
+    "visa",
+    "sme",
+    "uae",
+    "onboarding"
+  ],
+  "last_updated": "2026-05-03T12:49:50.665Z"
+}

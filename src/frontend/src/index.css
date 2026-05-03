@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: Fraunces;
+    --font-body: GeneralSans;
+    --font-mono: monospace;
+    --radius: 0.625rem;
+
+    --background: 0.99 0 0;
+    --foreground: 0.15 0 0;
+    --card: 1.0 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.15 0 0;
+
+    --primary: 0.25 0.08 254;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.95 0 0;
+    --secondary-foreground: 0.25 0 0;
+    --muted: 0.95 0 0;
+    --muted-foreground: 0.5 0 0;
+
+    --accent: 0.65 0.15 70;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.9 0 0;
+    --input: 0.9 0 0;
+    --ring: 0.25 0.08 254;
+
+    --chart-1: 0.45 0.18 254;
+    --chart-2: 0.65 0.15 70;
+    --chart-3: 0.5 0.15 130;
+    --chart-4: 0.7 0.12 180;
+    --chart-5: 0.6 0.15 30;
+
+    --sidebar: 0.18 0.04 254;
+    --sidebar-foreground: 0.95 0 0;
+    --sidebar-primary: 0.65 0.15 70;
+    --sidebar-primary-foreground: 0.18 0.04 254;
+    --sidebar-accent: 0.25 0 0;
+    --sidebar-accent-foreground: 0.95 0 0;
+    --sidebar-border: 0.28 0.04 254;
+    --sidebar-ring: 0.35 0 0;
+  }
+
+  .dark {
+    --background: 0.1 0 0;
+    --foreground: 0.95 0 0;
+    --card: 0.16 0 0;
+    --card-foreground: 0.95 0 0;
+    --popover: 0.2 0 0;
+    --popover-foreground: 0.95 0 0;
+
+    --primary: 0.75 0.12 254;
+    --primary-foreground: 0.1 0 0;
+
+    --secondary: 0.22 0 0;
+    --secondary-foreground: 0.85 0 0;
+    --muted: 0.22 0 0;
+    --muted-foreground: 0.55 0 0;
+
+    --accent: 0.72 0.16 70;
+    --accent-foreground: 0.1 0 0;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.95 0 0;
+
+    --border: 0.28 0 0;
+    --input: 0.28 0 0;
+    --ring: 0.75 0.12 254;
+
+    --chart-1: 0.65 0.18 254;
+    --chart-2: 0.72 0.16 70;
+    --chart-3: 0.68 0.16 130;
+    --chart-4: 0.75 0.14 180;
+    --chart-5: 0.7 0.16 30;
+
+    --sidebar: 0.14 0.02 254;
+    --sidebar-foreground: 0.95 0 0;
+    --sidebar-primary: 0.72 0.16 70;
+    --sidebar-primary-foreground: 0.14 0.02 254;
+    --sidebar-accent: 0.2 0 0;
+    --sidebar-accent-foreground: 0.95 0 0;
+    --sidebar-border: 0.24 0.02 254;
+    --sidebar-ring: 0.8 0 0;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  @font-face {
+    font-family: "Fraunces";
+    src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+    font-weight: 400 700;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "GeneralSans";
+    src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+    font-weight: 400 700;
+    font-display: swap;
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .badge-valid {
+    @apply bg-chart-3 text-white px-3 py-1 rounded-sm text-sm font-medium;
+  }
+
+  .badge-expiring {
+    @apply bg-chart-5 text-white px-3 py-1 rounded-sm text-sm font-medium;
+  }
+
+  .badge-expired {
+    @apply bg-destructive text-destructive-foreground px-3 py-1 rounded-sm text-sm font-medium;
+  }
+
+  .badge-active {
+    @apply bg-chart-1 text-white px-3 py-1 rounded-sm text-sm font-medium;
+  }
+
+  .badge-draft {
+    @apply bg-muted text-muted-foreground px-3 py-1 rounded-sm text-sm font-medium;
+  }
+
+  .badge-approved {
+    @apply bg-chart-3 text-white px-3 py-1 rounded-sm text-sm font-medium;
+  }
+
+  .kpi-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-smooth hover:shadow-md;
+  }
+
+  .data-table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .data-table thead {
+    @apply bg-muted border-b border-border;
+  }
+
+  .data-table th {
+    @apply text-left px-4 py-3 font-semibold text-foreground;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 border-b border-border;
+  }
+
+  .data-table tbody tr {
+    @apply hover:bg-muted/30 transition-smooth;
+  }
+
+  .sidebar-nav-item {
+    @apply flex items-center gap-3 px-4 py-2 rounded-md text-sidebar-foreground hover:bg-sidebar-accent transition-smooth;
+  }
+
+  .sidebar-nav-item.active {
+    @apply bg-sidebar-primary text-sidebar-primary-foreground;
+  }
+
+  .input-focus {
+    @apply border-ring ring-1 ring-ring;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium transition-smooth hover:opacity-90 active:scale-95 disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply border border-border bg-transparent text-foreground px-4 py-2 rounded-md font-medium transition-smooth hover:bg-muted active:bg-muted/70 disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-foreground px-4 py-2 rounded-md font-medium transition-smooth hover:bg-muted disabled:opacity-50;
+  }
+
+  .alert-timeline {
+    @apply flex flex-col gap-3 max-h-96 overflow-y-auto;
+  }
+
+  .alert-item {
+    @apply border-l-4 border-accent bg-card p-3 rounded-md text-sm transition-smooth;
+  }
+
+  .alert-item.expired {
+    @apply border-l-destructive bg-destructive/5;
+  }
+
+  .alert-item.expiring {
+    @apply border-l-chart-5 bg-chart-5/5;
+  }
+
+  .alert-item.info {
+    @apply border-l-chart-1 bg-chart-1/5;
+  }
+
+  /* Compliance Risk Engine */
+  .risk-badge {
+    @apply inline-flex items-center justify-center rounded-full font-bold text-sm transition-smooth;
+  }
+
+  .risk-low {
+    @apply bg-chart-3/20 text-chart-3 border border-chart-3;
+  }
+
+  .risk-medium {
+    @apply bg-amber-500/20 text-amber-600 border border-amber-500 dark:text-amber-400 dark:border-amber-400;
+  }
+
+  .risk-high {
+    @apply bg-chart-5/20 text-chart-5 border border-chart-5;
+  }
+
+  .risk-critical {
+    @apply bg-destructive/20 text-destructive border border-destructive;
+  }
+
+  /* Penalty Cards */
+  .penalty-card {
+    @apply bg-card border-l-4 border-l-destructive p-6 rounded-lg hover:shadow-md transition-smooth;
+  }
+
+  .penalty-amount {
+    @apply text-3xl font-bold font-display text-destructive;
+  }
+
+  .warning-banner {
+    @apply bg-destructive/10 border border-destructive/30 rounded-md p-4 flex items-center gap-3;
+  }
+
+  /* HR Assistant */
+  .suggestion-card {
+    @apply bg-gradient-to-br from-card to-card border border-accent/20 rounded-lg p-6 transition-smooth hover:shadow-lg hover:border-accent/40;
+  }
+
+  .suggestion-action {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-md bg-accent text-accent-foreground font-medium transition-smooth hover:opacity-90 active:scale-95 cursor-pointer;
+  }
+
+  /* Notifications */
+  .notification-toggle {
+    @apply flex items-center justify-between p-4 rounded-lg border border-border hover:bg-muted/30 transition-smooth;
+  }
+
+  /* ROI Dashboard */
+  .roi-summary-card {
+    @apply bg-card border border-border rounded-lg p-6 transition-smooth hover:shadow-md;
+  }
+
+  .roi-metric-value {
+    @apply text-3xl font-bold font-display text-foreground mt-2;
+  }
+
+  .roi-metric-delta.positive {
+    @apply text-chart-3;
+  }
+
+  .roi-metric-delta.negative {
+    @apply text-destructive;
+  }
+
+  /* Trust Layer */
+  .trust-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-chart-3/10 border border-chart-3/30 text-chart-3 text-sm font-medium;
+  }
+
+  .trust-section {
+    @apply bg-card border border-chart-3/20 rounded-lg p-6 space-y-4;
+  }
+
+  .activity-log-item {
+    @apply flex items-center justify-between py-3 border-b border-border last:border-b-0;
+  }
+
+  /* Upsell */
+  .upsell-modal {
+    @apply bg-card rounded-lg shadow-lg max-w-md w-full p-8 transition-smooth;
+  }
+
+  .upsell-header {
+    @apply text-2xl font-bold font-display text-foreground mb-2;
+  }
+
+  .upsell-cta {
+    @apply w-full bg-accent text-accent-foreground px-6 py-3 rounded-md font-semibold transition-smooth hover:opacity-90 active:scale-95 mb-3 cursor-pointer;
+  }
+
+  /* Onboarding */
+  .onboarding-progress-bar {
+    @apply h-2 bg-muted rounded-full overflow-hidden;
+  }
+
+  .onboarding-progress-fill {
+    @apply h-full bg-accent transition-all duration-500 ease-out;
+  }
+
+  .onboarding-step {
+    @apply bg-card border border-border rounded-lg p-8 transition-smooth;
+  }
+
+  /* CTAs */
+  .cta-primary-urgent {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-destructive text-destructive-foreground rounded-md font-bold text-base transition-smooth hover:opacity-90 active:scale-95 gap-2 cursor-pointer;
+  }
+
+  .cta-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-accent text-accent-foreground rounded-md font-bold text-base transition-smooth hover:opacity-90 active:scale-95 gap-2 cursor-pointer;
+  }
+
+  /* Skeleton */
+  .skeleton {
+    @apply bg-muted rounded-md animate-pulse;
+  }
+}
